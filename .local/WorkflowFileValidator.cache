@@ -1,0 +1,14 @@
+Workflows/ReadInvoiceText.xaml|639096217363480708
+Framework/KillAllProcesses.xaml|638996668260000000
+Framework/Process.xaml|638996668260000000
+Framework/RetryCurrentTransaction.xaml|638996668260000000
+Framework/InitAllApplications.xaml|638996668260000000
+Framework/TakeScreenshot.xaml|638996668260000000
+Framework/CloseAllApplications.xaml|638996668260000000
+Framework/SetTransactionStatus.xaml|638996668260000000
+Framework/InitAllSettings.xaml|638996668260000000
+Framework/GetTransactionData.xaml|638996668260000000
+Workflows/ValidateExtractedValues.xaml|639098570058584754
+Workflows/ExtractValues.xaml|639098615605336300
+Workflows/ReadInvoiceText.xaml|639096217363480708
+Main.xaml|639098616460421433

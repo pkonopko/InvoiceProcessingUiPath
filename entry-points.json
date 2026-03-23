@@ -1,0 +1,48 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "e19bfd07-4f1d-4faa-9422-1173d14a2d48",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "in_OrchestratorQueueName": {
+            "type": "string",
+            "description": "Allows the Orchestrator queue name to be passed as an argument, instead of only being defined in the configuration file."
+          },
+          "in_OrchestratorQueueFolder": {
+            "type": "string",
+            "description": "Allows the Orchestrator folder name where the queue is created to be passed as an argument, instead of only being defined in the configuration file."
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "filePath": "Workflows\\ReadInvoiceText.xaml",
+      "uniqueId": "60c2cf22-1518-4d53-9eca-d8bd962bd80d",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "inFilePath": {
+            "type": "string",
+            "x-default-expression": "\"C:\\InvoiceFile\\invoice_simple.pdf\"",
+            "default": "C:\\InvoiceFile\\invoice_simple.pdf"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "outInvoiceText": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

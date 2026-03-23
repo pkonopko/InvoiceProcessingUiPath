@@ -1,0 +1,33 @@
+{
+  "DisplayName": "ReadInvoiceText",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "outInvoiceText",
+      "DisplayName": "outInvoiceText",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "inFilePath",
+      "DisplayName": "inFilePath",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "C:\\InvoiceFile\\invoice_simple.pdf",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
