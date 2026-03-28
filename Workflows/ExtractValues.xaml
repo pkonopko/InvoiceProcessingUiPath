@@ -1,5 +1,8 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ExtractValues" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ExtractValues" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
+    <x:Property Name="VendorName" Type="OutArgument(x:String)" />
+    <x:Property Name="TotalValue" Type="OutArgument(x:Double)" />
+    <x:Property Name="BillTo" Type="OutArgument(x:String)" />
     <x:Property Name="InvoiceText" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
@@ -89,13 +92,11 @@
       <AssemblyReference>DocumentFormat.OpenXml.Framework</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ExtractValues" sap:VirtualizedContainerService.HintSize="632,2243.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ExtractValues" sap:VirtualizedContainerService.HintSize="692,2773.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="BillTo" />
-      <Variable x:TypeArguments="x:Double" Name="TotalValue" />
-      <Variable x:TypeArguments="x:String" Name="VendorName" />
       <Variable x:TypeArguments="x:String" Name="TotalValueText" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -133,6 +134,7 @@
         </Sequence>
       </If.Else>
     </If>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;BillTo; &quot; + BillTo]" />
     <Assign DisplayName="Assign Vendor Name" sap:VirtualizedContainerService.HintSize="452,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[VendorName]</OutArgument>
@@ -141,6 +143,7 @@
         <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(InvoiceText, "^\s*(.+?)\s*(\r?\n)").Groups(1).Value.Trim()]</InArgument>
       </Assign.Value>
     </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Vendor Name: &quot; + VendorName]" />
     <If Condition="[String.IsNullOrWhiteSpace(VendorName)]" DisplayName="If VendorName is Empty or Null" sap:VirtualizedContainerService.HintSize="452,340" sap2010:WorkflowViewState.IdRef="If_4">
       <If.Then>
         <Sequence DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="450,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_7">
@@ -168,7 +171,7 @@
         <OutArgument x:TypeArguments="x:String">[TotalValueText]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(InvoiceText, "(?i)Total\s*[€$]?\s*(\d+[\.,]\d{2})").Groups(1).Value.ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(InvoiceText, "(?im)^Total\s*[€$]?\s*(\d+[\.,]\d{2})\s*$").Groups(1).Value]</InArgument>
       </Assign.Value>
     </Assign>
     <If Condition="[String.IsNullOrWhiteSpace(TotalValueText)]" DisplayName="If TotalValueText is Empty or Null" sap:VirtualizedContainerService.HintSize="452,340" sap2010:WorkflowViewState.IdRef="If_1">
@@ -193,6 +196,7 @@
         </Sequence>
       </If.Else>
     </If>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;TotalValue: &quot; + TotalValue.ToString]" />
     <If Condition="[Not Double.TryParse(TotalValueText, TotalValue)]" DisplayName="If cannot Total Value convert the text into a number" sap:VirtualizedContainerService.HintSize="452,340" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
         <Sequence DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="450,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_10">
