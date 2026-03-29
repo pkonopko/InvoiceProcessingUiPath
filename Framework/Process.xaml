@@ -98,22 +98,14 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="692,888" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="984.6666666666666,888" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="VendorName" />
       <Variable x:TypeArguments="x:String" Name="BillTo" />
       <Variable x:TypeArguments="x:Double" Name="TotalValue" />
       <Variable x:TypeArguments="x:String" Name="InvoiceText" />
-      <Variable x:TypeArguments="x:String" Name="FilePathExcel">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">C:\InvoiceFile\Invoices.xlsx</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="FilePath">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">C:\InvoiceFile\invoice_simple.pdf</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="C:\InvoiceFile\Invoices.xlsx" Name="FilePathExcel" />
+      <Variable x:TypeArguments="x:String" Default="C:\InvoiceFile\invoice_simple.pdf" Name="FilePath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -138,10 +130,10 @@
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="WriteToExcel - Invoke Workflow File (Workflows\WriteToExcel.xaml)" sap:VirtualizedContainerService.HintSize="450,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Workflows\WriteToExcel.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="FilePathExcel" />
-        <InArgument x:TypeArguments="x:String" x:Key="VendorName" />
-        <InArgument x:TypeArguments="x:String" x:Key="BillTo" />
-        <InArgument x:TypeArguments="x:Double" x:Key="TotalValue" />
+        <InArgument x:TypeArguments="x:String" x:Key="FilePathExcel">[FilePathExcel]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="VendorName">[VendorName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="BillTo">[BillTo]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="TotalValue">[TotalValue]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="450,79.33333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
