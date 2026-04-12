@@ -15,6 +15,12 @@
           "in_OrchestratorQueueFolder": {
             "type": "string",
             "description": "Allows the Orchestrator folder name where the queue is created to be passed as an argument, instead of only being defined in the configuration file."
+          },
+          "PdfFiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": []
@@ -28,9 +34,7 @@
         "type": "object",
         "properties": {
           "inFilePath": {
-            "type": "string",
-            "x-default-expression": "\"C:\\InvoiceFile\\invoice_simple.pdf\"",
-            "default": "C:\\InvoiceFile\\invoice_simple.pdf"
+            "type": "string"
           }
         },
         "required": []
